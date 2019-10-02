@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         WebButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("https://www.sohu.com");
+                Uri uri = Uri.parse("https://mooc.study.163.com/university/deeplearning_ai#/c");
                 Intent intent = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent);
             }
