@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DeepMind</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="admin">Admin</string>
+    <string name="title_activity_login">管理员登入</string>
+    <string name="prompt_email">UserName</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Admin sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">欢迎 </string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">密码长度最少6位</string>
+    <string name="login_failed">无权限，登录失败</string>
+    <string name="admin_info">版本号:0.1 \n目前处于管理员模式，如想退出，请结束程序\n以下是用户反馈信息</string>
+</resources>
