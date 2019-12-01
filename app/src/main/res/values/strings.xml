@@ -15,4 +15,5 @@
     <string name="invalid_password">密码长度最少6位</string>
     <string name="login_failed">无权限，登录失败</string>
     <string name="admin_info">版本号:0.1 \n目前处于管理员模式，如想退出，请结束程序\n以下是用户反馈信息</string>
+    <string name="comment">识别一下我的评论</string>
 </resources>

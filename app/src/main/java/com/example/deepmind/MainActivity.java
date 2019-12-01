@@ -1,10 +1,9 @@
 package com.example.deepmind;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,11 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.net.URI;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private Button DetailButton;
     private Button WebButton;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editFeedback;
     private Button submitFeedback;
     private TextView adminInfo;
+    private Button comment;
 
     private static boolean adminMode;
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         editFeedback = findViewById(R.id.submit_feedback);
         adminInfo = findViewById(R.id.feedback);
         submitFeedback = findViewById(R.id.submit);
+        comment = findViewById(R.id.comment);
 
         init();
 
@@ -87,17 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        editFeedback.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus){
-                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    inputMethodManager.toggleSoftInput(0,InputMethodManager.HIDE_NOT_ALWAYS);
-                    editFeedback.clearFocus();
-                }
-            }
-        });
-
         submitFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 String currentDate = dateFormat.format(new Date());
                 adminInfo.append("\n"+ currentDate + "  " +editFeedback.getText());
                 Toast.makeText(getApplicationContext(), "成功提交反馈" , Toast.LENGTH_LONG).show();
+            }
+        });
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CommentActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -133,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if(adminMode){
             adminInfo.setVisibility(View.VISIBLE);
+            admin.setVisible(false);
         }
+    }
+
+    @Override
+    public void hideKeyboard(IBinder token) {
+        super.hideKeyboard(token);
+        editFeedback.clearFocus();
     }
 
     public static void setAdminMode(){
