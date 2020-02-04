@@ -16,4 +16,11 @@
     <string name="login_failed">无权限，登录失败</string>
     <string name="admin_info">版本号:0.1 \n目前处于管理员模式，如想退出，请结束程序\n以下是用户反馈信息</string>
     <string name="comment">识别一下我的评论</string>
+    <string name="bottom">我是有底线的</string>
+    
+    <string name="score">该顾客对本商家打分为：</string>
+    <string name="star1">口味：</string>
+    <string name="star2">环境：</string>
+    <string name="star3">食物：</string>
+
 </resources>

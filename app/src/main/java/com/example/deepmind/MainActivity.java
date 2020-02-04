@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.deepmind.data.Constants;
 
 import java.net.URI;
 import java.text.DateFormat;
@@ -50,11 +54,13 @@ public class MainActivity extends BaseActivity {
         submitFeedback = findViewById(R.id.submit);
         comment = findViewById(R.id.comment);
 
-        init();
+        initListener();
+        initData();
 
         Log.d("test","main");
     }
-    private void init(){
+
+    private void initListener(){
         DetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +113,15 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+    }
+
+    private void initData(){
         adminInfo.setVisibility(View.INVISIBLE);
+        if (Constants.DEBUG_MODE) {
+            adminInfo.setVisibility(View.VISIBLE);
+        }
+
         adminInfo.setText(R.string.admin_info);
     }
 
@@ -134,6 +148,18 @@ public class MainActivity extends BaseActivity {
             adminInfo.setVisibility(View.VISIBLE);
             admin.setVisible(false);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("feedback", adminInfo.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        adminInfo.setText(savedInstanceState.getString("feedback"));
     }
 
     @Override

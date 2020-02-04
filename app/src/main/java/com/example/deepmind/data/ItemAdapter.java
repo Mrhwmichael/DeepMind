@@ -24,6 +24,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         ImageView itemImage;
         TextView itemName;
         LinearLayout itemDetail;
+        TextView itemScore;
+        TextView itemStar1;
+        TextView itemStar2;
+        TextView itemStar3;
+
         RelativeLayout itemLayout;
 
         public ViewHolder(View view) {
@@ -31,6 +36,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             itemImage = (ImageView) view.findViewById(R.id.list_image);
             itemName = (TextView) view.findViewById(R.id.list_name);
             itemDetail = (LinearLayout) view.findViewById(R.id.item_detail);
+            itemScore = (TextView) view.findViewById(R.id.item_score);
+            itemStar1 = (TextView) view.findViewById(R.id.item_star1);
+            itemStar2 = (TextView) view.findViewById(R.id.item_star2);
+            itemStar3 = (TextView) view.findViewById(R.id.item_star3);
+
             itemLayout = (RelativeLayout) view.findViewById(R.id.item_layout);
             itemLayout.setOnClickListener(this);
         }
@@ -70,7 +80,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         DataItem item = mItemList.get(position);
         holder.itemName.setText(item.getName());
-        holder.itemImage.setImageResource(item.getImageId());
+        if(item.getId() == 1){
+            holder.itemImage.setImageResource(R.drawable.tick);
+        }else{
+            holder.itemImage.setImageResource(R.drawable.cross);
+        }
+        holder.itemScore.setText("该顾客对本商家打分为：" + item.getScore());
+        holder.itemStar1.setText("口味：" + item.getStar1());
+        holder.itemStar2.setText("环境：" + item.getStar2());
+        holder.itemStar3.setText("食物：" + item.getStar3());
+
         holder.bindView(position,mItemList.get(position));
     }
 
